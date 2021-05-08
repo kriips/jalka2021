@@ -19,13 +19,11 @@ defmodule Jalka2021.Accounts.UserNotifier do
 
     ==============================
 
-    Hi #{user.email},
+    Tere #{user.email},
 
-    You can confirm your account by visiting the URL below:
+    oma konto kinnitamiseks vajuta allolevale lingile:
 
     #{url}
-
-    If you didn't create an account with us, please ignore this.
 
     ==============================
     """)
@@ -39,13 +37,11 @@ defmodule Jalka2021.Accounts.UserNotifier do
 
     ==============================
 
-    Hi #{user.email},
+    Tere #{user.email},
 
-    You can reset your password by visiting the URL below:
+    parooli lähtestamiseks mine allolevale lingile:
 
     #{url}
-
-    If you didn't request this change, please ignore this.
 
     ==============================
     """)
@@ -59,13 +55,11 @@ defmodule Jalka2021.Accounts.UserNotifier do
 
     ==============================
 
-    Hi #{user.email},
+    Tere #{user.email},
 
-    You can change your email by visiting the URL below:
+    oma meiliaadressi vahetamiseks mine allolevale lingile:
 
     #{url}
-
-    If you didn't request this change, please ignore this.
 
     ==============================
     """)
