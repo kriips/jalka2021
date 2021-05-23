@@ -1,0 +1,482 @@
+[
+  {
+    "group": "Grupp A",
+    "name": "1",
+    "home_team_id": 1,
+    "away_team_id": 2,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-14T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp A",
+    "name": "2",
+    "home_team_id": 3,
+    "away_team_id": 4,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-15T17:00:00+05:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp A",
+    "name": "17",
+    "home_team_id": 1,
+    "away_team_id": 3,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-19T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp A",
+    "name": "18",
+    "home_team_id": 4,
+    "away_team_id": 2,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-20T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp A",
+    "name": "33",
+    "home_team_id": 4,
+    "away_team_id": 1,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-25T18:00:00+04:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp A",
+    "name": "34",
+    "home_team_id": 2,
+    "away_team_id": 3,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-25T17:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "3",
+    "home_team_id": 5,
+    "away_team_id": 6,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-15T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "4",
+    "home_team_id": 7,
+    "away_team_id": 8,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-15T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "19",
+    "home_team_id": 5,
+    "away_team_id": 7,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-20T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "20",
+    "home_team_id": 8,
+    "away_team_id": 6,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-20T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "35",
+    "home_team_id": 8,
+    "away_team_id": 5,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-25T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp B",
+    "name": "36",
+    "home_team_id": 6,
+    "away_team_id": 7,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-25T20:00:00+02:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "5",
+    "home_team_id": 9,
+    "away_team_id": 10,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-16T13:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "6",
+    "home_team_id": 11,
+    "away_team_id": 12,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-16T19:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "21",
+    "home_team_id": 9,
+    "away_team_id": 11,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-21T20:00:00+05:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "22",
+    "home_team_id": 12,
+    "away_team_id": 10,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-21T16:00:00+04:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "37",
+    "home_team_id": 12,
+    "away_team_id": 9,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-26T17:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp C",
+    "name": "38",
+    "home_team_id": 10,
+    "away_team_id": 11,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-26T17:00:00+02:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "7",
+    "home_team_id": 13,
+    "away_team_id": 14,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-16T16:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "8",
+    "home_team_id": 15,
+    "away_team_id": 16,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-16T21:00:00+02:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "23",
+    "home_team_id": 13,
+    "away_team_id": 15,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-21T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "24",
+    "home_team_id": 16,
+    "away_team_id": 14,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-22T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "39",
+    "home_team_id": 16,
+    "away_team_id": 13,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-26T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp D",
+    "name": "40",
+    "home_team_id": 14,
+    "away_team_id": 15,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-26T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "9",
+    "home_team_id": 17,
+    "away_team_id": 18,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-17T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "10",
+    "home_team_id": 19,
+    "away_team_id": 20,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-17T16:00:00+04:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "25",
+    "home_team_id": 17,
+    "away_team_id": 19,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-22T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "26",
+    "home_team_id": 20,
+    "away_team_id": 18,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-22T20:00:00+02:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "41",
+    "home_team_id": 20,
+    "away_team_id": 17,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-27T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp E",
+    "name": "42",
+    "home_team_id": 18,
+    "away_team_id": 19,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-27T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "11",
+    "home_team_id": 21,
+    "away_team_id": 22,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-17T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "12",
+    "home_team_id": 23,
+    "away_team_id": 24,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-18T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "27",
+    "home_team_id": 21,
+    "away_team_id": 23,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-23T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "28",
+    "home_team_id": 24,
+    "away_team_id": 22,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-23T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "43",
+    "home_team_id": 24,
+    "away_team_id": 21,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-27T17:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp F",
+    "name": "44",
+    "home_team_id": 22,
+    "away_team_id": 23,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-27T19:00:00+05:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "13",
+    "home_team_id": 25,
+    "away_team_id": 26,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-18T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "14",
+    "home_team_id": 27,
+    "away_team_id": 28,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-18T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "29",
+    "home_team_id": 25,
+    "away_team_id": 27,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-23T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "30",
+    "home_team_id": 28,
+    "away_team_id": 26,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-24T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "45",
+    "home_team_id": 28,
+    "away_team_id": 25,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-28T20:00:00+02:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp G",
+    "name": "46",
+    "home_team_id": 26,
+    "away_team_id": 27,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-28T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "15",
+    "home_team_id": 29,
+    "away_team_id": 30,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-19T18:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "16",
+    "home_team_id": 31,
+    "away_team_id": 32,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-19T15:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "31",
+    "home_team_id": 29,
+    "away_team_id": 31,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-24T20:00:00+05:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "32",
+    "home_team_id": 32,
+    "away_team_id": 30,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-24T21:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "47",
+    "home_team_id": 32,
+    "away_team_id": 29,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-28T17:00:00+03:00",
+    "finished": false
+  },
+  {
+    "group": "Grupp H",
+    "name": "48",
+    "home_team_id": 30,
+    "away_team_id": 31,
+    "home_result": null,
+    "away_result": null,
+    "date": "2018-06-28T18:00:00+04:00",
+    "finished": false
+  }
+]

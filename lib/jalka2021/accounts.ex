@@ -5,7 +5,7 @@ defmodule Jalka2021.Accounts do
 
   import Ecto.Query, warn: false
   alias Jalka2021.Repo
-  alias Jalka2021.Accounts.{User, UserToken, UserNotifier}
+  alias Jalka2021.Accounts.{User, AllowedUser, UserToken, UserNotifier}
 
   ## Database getters
 
@@ -23,6 +23,14 @@ defmodule Jalka2021.Accounts do
   """
   def get_user_by_email(email) when is_binary(email) do
     Repo.get_by(User, email: email)
+  end
+
+  def get_user_by_name(name) when is_binary(name) do
+    Repo.get_by(User, name: name)
+  end
+
+  def get_allowed_users_by_name(query) when is_binary(query) do
+    Repo.all(from a in AllowedUser, where: ilike(a.name, ^"%#{query}%"))
   end
 
   @doc """

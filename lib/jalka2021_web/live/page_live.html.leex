@@ -1,5 +1,15 @@
 <section>
-  <p>Siia tuleb reeglite kirjeldus ja annetamise info</p>
+  <h4>Siia tuleb reeglite kirjeldus ja annetamise info</h4>
+  <div class="container">
+    <div class="row">
+      <div class="column"><button class="button-large button-outline button-main">Ennusta</button></div>
+      <div class="column column-offset-5"><button class="button-large button-outline button-main">Edetabel</button></div>
+    </div>
+    <div class="row">
+      <div class="column"><button class="button-large button-outline button-main">Alagrupimängud</button></div>
+      <div class="column column-offset-5"><button class="button-large button-outline button-main">Playoff-mängud</button></div>
+    </div>
+  </div>
 
   <form phx-change="suggest" phx-submit="search">
     <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
@@ -8,6 +18,6 @@
         <option value="<%= app %>"><%= app %></option>
       <% end %>
     </datalist>
-    <button type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
+    <button class="button-large" type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
   </form>
 </section>
