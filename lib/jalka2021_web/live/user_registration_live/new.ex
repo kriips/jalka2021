@@ -12,8 +12,7 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
       user_map =  Map.from_struct(user)
       {user.id, user.name}
     end)
-    |> Enum.slice(0, 5)
-
+    |> Enum.slice(0, 10)
   end
 
   @impl true
@@ -39,16 +38,10 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
     IO.inspect("saving") # TODO: Remove this inspect
     case Accounts.register_user(user_params) do
       {:ok, user} ->
-        {:ok, _} =
-          Accounts.deliver_user_confirmation_instructions(
-            user,
-            &Routes.user_confirmation_url(socket, :confirm, &1)
-          )
-
         {:noreply,
           socket
-          |> put_flash(:info, "Konto loodud. Kontrolli oma emaili selle õigsuse kinnitamiseks")
-          |> redirect(to: Routes.user_session_path(socket, :new))}
+          |> put_flash(:info, "Konto loodud")
+          |> redirect(to: Routes.prediction_path(socket, :edit))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}
