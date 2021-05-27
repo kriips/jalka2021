@@ -6,9 +6,11 @@ defmodule Jalka2021.Repo.Migrations.CreateUsersAuthTables do
 
     create table(:users) do
       add :name, :citext, null: false
+      add :email, :citext
       add :hashed_password, :string, null: false
       add(:group_score, :integer, default: 0)
       add(:playoff_score, :integer, default: 0)
+      add(:confirmed_at, :naive_datetime`)
 
       timestamps()
     end

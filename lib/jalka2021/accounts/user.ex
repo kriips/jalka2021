@@ -1,10 +1,12 @@
 defmodule Jalka2021.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Jalka2021.Accounts
 
   @derive {Inspect, except: [:password]}
   schema "users" do
     field :email, :string
+    field :name, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
@@ -31,9 +33,17 @@ defmodule Jalka2021.Accounts.User do
   """
   def registration_changeset(user, attrs, opts \\ []) do
     user
-    |> cast(attrs, [:email, :password])
-    |> validate_email()
+    |> cast(attrs, [:name, :password])
+    |> validate_name()
     |> validate_password(opts)
+  end
+
+  defp validate_name(changeset) do
+    changeset
+    |> validate_required([:name])
+    |> unsafe_validate_unique(:name, Jalka2021.Repo)
+    |> unique_constraint(:name)
+    |> check_whitelist
   end
 
   defp validate_email(changeset) do
@@ -48,7 +58,7 @@ defmodule Jalka2021.Accounts.User do
   defp validate_password(changeset, opts) do
     changeset
     |> validate_required([:password])
-    |> validate_length(:password, min: 12, max: 80)
+    |> validate_length(:password, min: 5, max: 80)
     # |> validate_format(:password, ~r/[a-z]/, message: "at least one lower case character")
     # |> validate_format(:password, ~r/[A-Z]/, message: "at least one upper case character")
     # |> validate_format(:password, ~r/[!?@#$%^&*_0-9]/, message: "at least one digit or punctuation character")
@@ -65,6 +75,13 @@ defmodule Jalka2021.Accounts.User do
       |> delete_change(:password)
     else
       changeset
+    end
+  end
+
+  defp check_whitelist(changeset) do
+    case Accounts.get_allowed_users_by_name(get_field(changeset, :name)) do
+      [] ->add_error(changeset, :name, "ei kuulu nimekirja")
+      _ -> changeset
     end
   end
 

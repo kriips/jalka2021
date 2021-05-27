@@ -5,6 +5,7 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
   alias Jalka2021.Accounts
   alias Jalka2021.Accounts.User
   alias Jalka2021Web.Resolvers.AccountsResolver
+  alias Jalka2021Web.UserAuth
 
   defp search(query) do
     AccountsResolver.list_allowed_users(query)
@@ -35,16 +36,20 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    IO.inspect("saving") # TODO: Remove this inspect
     case Accounts.register_user(user_params) do
       {:ok, user} ->
         {:noreply,
           socket
           |> put_flash(:info, "Konto loodud")
-          |> redirect(to: Routes.prediction_path(socket, :edit))}
+          |> redirect(to: Routes.user_prediction_live_path(socket, :edit))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        IO.inspect(changeset) # TODO: Remove this inspect
+        {:noreply,
+          socket
+          |> assign(changeset: changeset)
+          |> put_flash(:error, "Konto loodud")
+        }
     end
   end
 end

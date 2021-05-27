@@ -5,9 +5,11 @@ defmodule Jalka2021Web.UserPredictionLive.Edit do
   alias Jalka2021.Accounts
   alias Jalka2021.Accounts.User
   alias Jalka2021Web.Resolvers.AccountsResolver
+  alias Jalka2001Web.LiveHelpers
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
+    socket = LiveHelpers.assign_defaults(session, socket)
     {:ok, assign(socket, matches: %{})}
   end
 

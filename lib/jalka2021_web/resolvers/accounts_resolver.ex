@@ -28,7 +28,7 @@ defmodule Jalka2021Web.Resolvers.AccountsResolver do
     {:ok, nil}
   end
 #
-#  def register_user(args, _) do
+#  def register_user(args, _) do`
 #    case Jalka2021.Accounts.register_user(args) do
 #      {:ok, user} ->
 #        {:ok, %{user: user}}

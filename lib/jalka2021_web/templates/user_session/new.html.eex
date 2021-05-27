@@ -1,0 +1,26 @@
+<h1>Sisene</h1>
+
+<%= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user], fn f -> %>
+  <%= if @error_message do %>
+    <div class="alert alert-danger">
+      <p><%= @error_message %></p>
+    </div>
+  <% end %>
+
+  <%= label f, :nimi %>
+  <%= email_input f, :name, required: true %>
+
+  <%= label f, :parool %>
+  <%= password_input f, :password, required: true %>
+
+  <%= label f, :remember_me, "Pea mind 60 päeva meeles" %>
+  <%= checkbox f, :remember_me %>
+
+  <div>
+    <%= submit "Sisene" %>
+  </div>
+<% end %>
+
+<p>
+  <%= link "Registreeri", to: Routes.user_registration_new_path(@conn, :new) %>
+</p>

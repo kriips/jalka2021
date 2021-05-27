@@ -6,11 +6,13 @@ defmodule Jalka2021Web.UserRegistrationController do
   alias Jalka2021Web.UserAuth
 
   def new(conn, _params) do
+    IO.inspect("new controller") # TODO: Remove this inspect
     changeset = Accounts.change_user_registration(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
+    IO.inspect("create controller") # TODO: Remove this inspect
     case Accounts.register_user(user_params) do
       {:ok, user} ->
         {:ok, _} =
