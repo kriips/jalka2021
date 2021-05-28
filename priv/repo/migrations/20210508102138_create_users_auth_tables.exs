@@ -10,7 +10,7 @@ defmodule Jalka2021.Repo.Migrations.CreateUsersAuthTables do
       add :hashed_password, :string, null: false
       add(:group_score, :integer, default: 0)
       add(:playoff_score, :integer, default: 0)
-      add(:confirmed_at, :naive_datetime`)
+      add(:confirmed_at, :naive_datetime)
 
       timestamps()
     end

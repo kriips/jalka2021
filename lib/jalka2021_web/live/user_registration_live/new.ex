@@ -10,7 +10,7 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
   defp search(query) do
     AccountsResolver.list_allowed_users(query)
     |> Enum.map(fn user ->
-      user_map =  Map.from_struct(user)
+      user_map = Map.from_struct(user)
       {user.id, user.name}
     end)
     |> Enum.slice(0, 10)
@@ -19,37 +19,29 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
   @impl true
   def mount(_params, _session, socket) do
     changeset = Accounts.change_user_registration(%User{})
-    {:ok, assign(socket, changeset: changeset, query: "", results: %{})}
+    {:ok, assign(socket, changeset: changeset, query: "", results: %{}, trigger_submit: false)}
   end
 
   @impl true
-  def render(assigns), do: Phoenix.View.render(Jalka2021Web.UserRegistrationView, "new.html", assigns)
+  def render(assigns),
+    do: Phoenix.View.render(Jalka2021Web.UserRegistrationView, "new.html", assigns)
 
   @impl true
   def handle_event("validate", %{"user" => user_params}, socket) do
-     changeset =
-       %User{}
-        |> Jalka2021.Accounts.change_user_registration(user_params)
-        |> Map.put(:action, :insert)
+    changeset =
+      %User{}
+      |> Jalka2021.Accounts.change_user_registration(user_params)
+      |> Map.put(:action, :insert)
 
-    {:noreply, assign(socket, results: search(user_params["name"]), query: user_params["name"], changeset: changeset)}
+    {:noreply,
+     assign(socket,
+       results: search(user_params["name"]),
+       query: user_params["name"],
+       changeset: changeset
+     )}
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    case Accounts.register_user(user_params) do
-      {:ok, user} ->
-        {:noreply,
-          socket
-          |> put_flash(:info, "Konto loodud")
-          |> redirect(to: Routes.user_prediction_live_path(socket, :edit))}
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        IO.inspect(changeset) # TODO: Remove this inspect
-        {:noreply,
-          socket
-          |> assign(changeset: changeset)
-          |> put_flash(:error, "Konto loodud")
-        }
-    end
+    {:noreply, socket |> assign(trigger_submit: true)}
   end
 end

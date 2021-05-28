@@ -8,13 +8,10 @@
   <% end %>
 
   <%= label f, :nimi %>
-  <%= email_input f, :name, required: true %>
+  <%= text_input f, :name, required: true %>
 
   <%= label f, :parool %>
   <%= password_input f, :password, required: true %>
-
-  <%= label f, :remember_me, "Pea mind 60 päeva meeles" %>
-  <%= checkbox f, :remember_me %>
 
   <div>
     <%= submit "Sisene" %>

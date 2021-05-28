@@ -143,12 +143,14 @@ navbar
 .navigation .navigation-list {
   list-style: none;
   margin-bottom: 0;
+  line-height: 5.2rem;
   margin-right: 5rem
 }
 
 @media(min-width: 80rem) {
   .navigation .navigation-list {
-    margin-right:0
+    margin-right:0;
+    line-height: 5.2rem;
   }
 }
 

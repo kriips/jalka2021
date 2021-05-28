@@ -9,9 +9,9 @@ defmodule Jalka2021Web.UserSessionController do
   end
 
   def create(conn, %{"user" => user_params}) do
-    %{"email" => email, "password" => password} = user_params
+    %{"name" => name, "password" => password} = user_params
 
-    if user = Accounts.get_user_by_email_and_password(email, password) do
+    if user = Accounts.get_user_by_name_and_password(name, password) do
       UserAuth.log_in_user(conn, user, user_params)
     else
       render(conn, "new.html", error_message: "Invalid email or password")
@@ -20,7 +20,7 @@ defmodule Jalka2021Web.UserSessionController do
 
   def delete(conn, _params) do
     conn
-    |> put_flash(:info, "Logged out successfully.")
+    |> put_flash(:info, "Oled välja logitud")
     |> UserAuth.log_out_user()
   end
 end

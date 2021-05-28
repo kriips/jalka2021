@@ -7,6 +7,7 @@ defmodule Jalka2021.Repo.Migrations.CreateAllowedUsers do
 
       timestamps()
     end
+
     create(index(:allowed_users, [:id]))
     create(index(:allowed_users, [:name]))
   end

@@ -1,6 +1,6 @@
-<ul>
 <%= if @current_user do %>
-  <li><%= @current_user.email %></li>
-  <li><%= link "Välju", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+  <ul class="navigation-list float-right">
+    <li class="navigation-item"><%= @current_user.name %></li>
+    <li class="navigation-item"><%= link "Välju", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
+  </ul>
 <% end %>
-</ul>

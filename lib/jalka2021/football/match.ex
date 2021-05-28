@@ -22,7 +22,17 @@ defmodule Jalka2021.Football.Match do
   @doc false
   def changeset(match, attrs) do
     match
-    |> cast(attrs, [:group, :name, :home_team_id, :away_team_id, :home_score, :away_score, :result, :date, :finished])
+    |> cast(attrs, [
+      :group,
+      :name,
+      :home_team_id,
+      :away_team_id,
+      :home_score,
+      :away_score,
+      :result,
+      :date,
+      :finished
+    ])
   end
 
   def get_match!(id), do: Repo.get!(Match, id)

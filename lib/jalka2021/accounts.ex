@@ -29,13 +29,13 @@ defmodule Jalka2021.Accounts do
     Repo.get_by(User, name: name)
   end
 
-  def get_user_by_name(name), do: []
+  def get_user_by_name(_name), do: []
 
   def get_allowed_users_by_name(query) when is_binary(query) do
     Repo.all(from a in AllowedUser, where: ilike(a.name, ^"%#{query}%"))
   end
 
-  def get_allowed_users_by_name(name), do: []
+  def get_allowed_users_by_name(_name), do: []
 
   @doc """
   Gets a user by email and password.
@@ -52,6 +52,12 @@ defmodule Jalka2021.Accounts do
   def get_user_by_email_and_password(email, password)
       when is_binary(email) and is_binary(password) do
     user = Repo.get_by(User, email: email)
+    if User.valid_password?(user, password), do: user
+  end
+
+  def get_user_by_name_and_password(name, password)
+      when is_binary(name) and is_binary(password) do
+    user = Repo.get_by(User, name: name)
     if User.valid_password?(user, password), do: user
   end
 
@@ -88,7 +94,6 @@ defmodule Jalka2021.Accounts do
   def register_user(attrs) do
     %User{}
     |> User.registration_changeset(attrs)
-    |> IO.inspect() # TODO: Remove this inspect
     |> Repo.insert()
     |> IO.inspect() # TODO: Remove this inspect
   end

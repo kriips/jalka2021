@@ -11,7 +11,9 @@ defmodule Jalka2021.Football.Team do
     field(:flag, :string)
     field(:emoji, :string)
     field(:emoji_string, :string)
-    many_to_many :playoff_predictions, PlayoffPrediction, join_through: "playoff_predictions_teams"
+
+    many_to_many :playoff_predictions, PlayoffPrediction,
+      join_through: "playoff_predictions_teams"
 
     timestamps()
   end
@@ -23,5 +25,4 @@ defmodule Jalka2021.Football.Team do
   end
 
   def get_team!(id), do: Repo.get!(Team, id)
-
 end

@@ -4,7 +4,7 @@ defmodule Jalka2021Web.Resolvers.AccountsResolver do
 
   def list_users() do
     User
-    |> Repo.all
+    |> Repo.all()
   end
 
   def list_allowed_users(query) do
@@ -15,6 +15,7 @@ defmodule Jalka2021Web.Resolvers.AccountsResolver do
     case Jalka2021.Accounts.get_user!(id) do
       nil ->
         {:error, "User ID #{id} not found"}
+
       user ->
         {:ok, user}
     end
@@ -27,25 +28,4 @@ defmodule Jalka2021Web.Resolvers.AccountsResolver do
   def current_user(_, _) do
     {:ok, nil}
   end
-#
-#  def register_user(args, _) do`
-#    case Jalka2021.Accounts.register_user(args) do
-#      {:ok, user} ->
-#        {:ok, %{user: user}}
-#
-#      {:error, errors} ->
-#        {:error, errors |> process_errors}
-#    end
-#  end
-
-#  def login_user(%{name: name, password: password}, _) do
-#    with user <- Accounts.get_user_by_name(name),
-#         {:ok, user} <- Comeonin.Bcrypt.check_pass(user, password),
-#         {:ok, token, _} <- Pokedex.Guardian.encode_and_sign(user) do
-#      {:ok, %{user: user, token: token}}
-#    else
-#      _ -> {:error, "Valed andmed"}
-#    end
-#  end
-
 end
