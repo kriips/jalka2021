@@ -7,7 +7,6 @@ defmodule Jalka2021.Football.Match do
 
   schema "matches" do
     field(:group, :string)
-    field(:name, :string)
     belongs_to(:home_team, Team)
     belongs_to(:away_team, Team)
     field(:home_score, :integer)
@@ -24,7 +23,6 @@ defmodule Jalka2021.Football.Match do
     match
     |> cast(attrs, [
       :group,
-      :name,
       :home_team_id,
       :away_team_id,
       :home_score,

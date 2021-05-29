@@ -7,10 +7,8 @@ defmodule Jalka2021.Football.Team do
 
   schema "teams" do
     field(:name, :string)
-    field(:fifa_code, :string)
+    field(:code, :string)
     field(:flag, :string)
-    field(:emoji, :string)
-    field(:emoji_string, :string)
 
     many_to_many :playoff_predictions, PlayoffPrediction,
       join_through: "playoff_predictions_teams"
@@ -21,7 +19,7 @@ defmodule Jalka2021.Football.Team do
   @doc false
   def changeset(team, attrs) do
     team
-    |> cast(attrs, [:name, :fifa_code, :flag, :emoji, :emoji_string])
+    |> cast(attrs, [:name, :code, :flag, :id])
   end
 
   def get_team!(id), do: Repo.get!(Team, id)

@@ -1,4 +1,4 @@
-defmodule Jalka2001Web.LiveHelpers do
+defmodule Jalka2021Web.LiveHelpers do
   import Phoenix.LiveView
   alias Jalka2021.Accounts
   alias Jalka2021.Accounts.User

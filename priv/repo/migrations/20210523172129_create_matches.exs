@@ -4,7 +4,6 @@ defmodule Jalka2021.Repo.Migrations.CreateMatches do
   def change do
     create table(:matches) do
       add(:group, :string, null: false)
-      add(:name, :string, null: false)
       add :home_team_id, references("teams")
       add :away_team_id, references("teams")
       add(:home_score, :integer)

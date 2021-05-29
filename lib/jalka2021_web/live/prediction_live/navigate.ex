@@ -1,11 +1,11 @@
-defmodule Jalka2021Web.UserPredictionLive.Edit do
+defmodule Jalka2021Web.UserPredictionLive.Navigate do
   use Phoenix.LiveView
 
   alias Jalka2021Web.Router.Helpers, as: Routes
   alias Jalka2021.Accounts
   alias Jalka2021.Accounts.User
   alias Jalka2021Web.Resolvers.AccountsResolver
-  alias Jalka2001Web.LiveHelpers
+  alias Jalka2021Web.LiveHelpers
 
   @impl true
   def mount(_params, session, socket) do
@@ -14,5 +14,6 @@ defmodule Jalka2021Web.UserPredictionLive.Edit do
   end
 
   @impl true
-  def render(assigns), do: Phoenix.View.render(Jalka2021Web.PredictionView, "edit.html", assigns)
+  def render(assigns),
+    do: Phoenix.View.render(Jalka2021Web.PredictionView, "navigate.html", assigns)
 end

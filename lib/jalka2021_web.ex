@@ -49,7 +49,7 @@ defmodule Jalka2021Web do
         layout: {Jalka2021Web.LayoutView, "live.html"}
 
       unquote(view_helpers())
-      import Jalka2001Web.LiveHelpers
+      import Jalka2021Web.LiveHelpers
     end
   end
 

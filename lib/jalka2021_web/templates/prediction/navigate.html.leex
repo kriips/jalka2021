@@ -1,0 +1,48 @@
+<main role="main" class="container">
+    <h1>Ennusta</h1>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "A") do %>
+                <button class="button-large button-outline button-main">Alagrupp A</button>
+                <% end %>
+            </div>
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "B") do %>
+                <button class="button-large button-outline button-main">Alagrupp B</button>
+                <% end %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "C") do %>
+                <button class="button-large button-outline button-main">Alagrupp C</button>
+                <% end %>
+            </div>
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "D") do %>
+                <button class="button-large button-outline button-main">Alagrupp D</button>
+                <% end %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "E") do %>
+                <button class="button-large button-outline button-main">Alagrupp E</button>
+                <% end %>
+            </div>
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_groups_path(@socket, :edit, "F") do %>
+                <button class="button-large button-outline button-main">Alagrupp F</button>
+                <% end %>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <%= live_redirect to: Routes.user_prediction_play_offs_path(@socket, :edit) do %>
+                <button class="button-large button-outline button-main">Väljalangemismängud</button>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</main>

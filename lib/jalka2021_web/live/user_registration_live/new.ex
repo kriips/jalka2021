@@ -42,6 +42,9 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
   end
 
   def handle_event("save", %{"user" => user_params}, socket) do
-    {:noreply, socket |> assign(trigger_submit: true)}
+    # TODO: Remove this inspect
+    IO.inspect(socket)
+
+    {:noreply, socket |> assign(trigger_submit: socket.assigns.changeset.valid?)}
   end
 end

@@ -5,9 +5,7 @@ defmodule Jalka2021.Repo.Migrations.CreateTeams do
     create table(:teams) do
       add(:name, :string, null: false)
       add(:flag, :string, null: false)
-      add(:emoji, :string, null: false)
-      add(:fifa_code, :string, null: false)
-      add(:emoji_string, :string, null: false)
+      add(:code, :string, null: false)
       timestamps()
     end
 

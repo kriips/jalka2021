@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="column">
-        <%= live_redirect to: Routes.user_prediction_live_path(@socket, :edit) do %>
+        <%= live_redirect to: Routes.user_prediction_navigate_path(@socket, :navigate) do %>
           <button class="button-large button-outline button-main">Ennusta</button>
         <% end %>
       </div>
@@ -14,14 +14,4 @@
       <div class="column column-offset-5"><button class="button-large button-outline button-main">Playoff-mängud</button></div>
     </div>
   </div>
-
-  <form phx-change="suggest" phx-submit="search">
-    <input type="text" name="q" value="<%= @query %>" placeholder="Live dependency search" list="results" autocomplete="off"/>
-    <datalist id="results">
-      <%= for {app, _vsn} <- @results do %>
-        <option value="<%= app %>"><%= app %></option>
-      <% end %>
-    </datalist>
-    <button class="button-large" type="submit" phx-disable-with="Searching...">Go to Hexdocs</button>
-  </form>
 </section>

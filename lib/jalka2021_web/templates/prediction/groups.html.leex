@@ -1,0 +1,51 @@
+<main role="main" class="container">
+    <h1>Alagrupp <%= @group%></h1>
+    <div class="container">
+        <%= for {match, changeset} <- @predictions do %>
+        <div class="row prediction-row">
+            <div class="column prediction-col">
+                <div class="row height-10">
+                    <div class="column">
+                        <h3 class="team-name"><%= match.home_team.name %></h3>
+                    </div>
+                    <div class="column">
+                        <svg class="flag">
+                            <image class="flag-image" xlink:href=<%= match.home_team.flag %> />
+                        </svg>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <span class="score">4</span>
+                    </div>
+                </div>
+            </div>
+            <div class="column triangle height-10 prediction-col">
+                <div class="triangle-up"></div>
+                <div class="triangle-down"></div>
+            </div>
+            <div class="column triangle height-10 prediction-col">
+                <div class="triangle-up"></div>
+                <div class="triangle-down"></div>
+            </div>
+            <div class="column prediction-col">
+                <div class="row height-10">
+                    <div class="column">
+                        <svg class="flag">
+                            <image class="flag-image" xlink:href=<%= match.away_team.flag %> />
+                        </svg>
+                    </div>
+                    <div class="column">
+                        <h3 class="team-name"><%= match.away_team.name %></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column">
+                        <span class="score">4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</main>
