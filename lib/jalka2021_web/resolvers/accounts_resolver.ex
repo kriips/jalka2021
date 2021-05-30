@@ -1,6 +1,6 @@
 defmodule Jalka2021Web.Resolvers.AccountsResolver do
   alias Jalka2021.{Accounts, Repo}
-  alias Accounts.{User, AllowedUser}
+  alias Accounts.{User}
 
   def list_users() do
     User

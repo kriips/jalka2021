@@ -1,16 +1,13 @@
 defmodule Jalka2021Web.UserRegistrationLive.New do
   use Phoenix.LiveView
 
-  alias Jalka2021Web.Router.Helpers, as: Routes
   alias Jalka2021.Accounts
   alias Jalka2021.Accounts.User
   alias Jalka2021Web.Resolvers.AccountsResolver
-  alias Jalka2021Web.UserAuth
 
   defp search(query) do
     AccountsResolver.list_allowed_users(query)
     |> Enum.map(fn user ->
-      user_map = Map.from_struct(user)
       {user.id, user.name}
     end)
     |> Enum.slice(0, 10)
@@ -41,10 +38,7 @@ defmodule Jalka2021Web.UserRegistrationLive.New do
      )}
   end
 
-  def handle_event("save", %{"user" => user_params}, socket) do
-    # TODO: Remove this inspect
-    IO.inspect(socket)
-
+  def handle_event("save", %{"user" => _user_params}, socket) do
     {:noreply, socket |> assign(trigger_submit: socket.assigns.changeset.valid?)}
   end
 end

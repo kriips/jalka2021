@@ -18,7 +18,7 @@ defmodule Jalka2021Web.UserRegistrationController do
         |> UserAuth.log_in_user(user)
         |> redirect(to: "/predict")
 
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, %Ecto.Changeset{} = _changeset} ->
         conn
         |> redirect(to: Routes.user_session_path(conn, :new))
     end

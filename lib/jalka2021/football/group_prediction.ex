@@ -7,8 +7,8 @@ defmodule Jalka2021.Football.GroupPrediction do
   schema "group_prediction" do
     belongs_to(:user, Jalka2021.Accounts.User)
     belongs_to(:match, Jalka2021.Football.Match)
-    field(:home_score, :integer)
-    field(:away_score, :integer)
+    field(:home_score, :integer, default: 0)
+    field(:away_score, :integer, default: 0)
     field(:result, :string)
 
     timestamps()

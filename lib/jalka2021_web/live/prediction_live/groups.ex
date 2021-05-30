@@ -1,10 +1,9 @@
 defmodule Jalka2021Web.UserPredictionLive.Groups do
   use Phoenix.LiveView
 
-  alias Jalka2021Web.Router.Helpers, as: Routes
   alias Jalka2021Web.Resolvers.FootballResolver
   alias Jalka2021Web.LiveHelpers
-  alias Jalka2021.Football.{GroupPrediction, Match}
+  alias Jalka2021.Football.{Match}
 
   @impl true
   def mount(params, session, socket) do
@@ -13,7 +12,7 @@ defmodule Jalka2021Web.UserPredictionLive.Groups do
 
     predictions =
       FootballResolver.list_matches_by_group(group)
-      |> Enum.map(fn match -> add_changeset(match, socket) end)
+      |> Enum.map(fn match -> add_score(match, socket) end)
 
     # TODO: Remove this inspect
     IO.inspect(predictions)
@@ -24,16 +23,99 @@ defmodule Jalka2021Web.UserPredictionLive.Groups do
   def render(assigns),
     do: Phoenix.View.render(Jalka2021Web.PredictionView, "groups.html", assigns)
 
-  defp add_changeset(%Match{} = match, socket) do
-    changeset =
-      GroupPrediction.create_changeset(
-        %GroupPrediction{},
-        %{
-          user: socket.assigns.current_user.id,
-          match: match.id
-        }
-      )
+  @impl true
+  def handle_event("inc-score", user_params, socket) do
+    changed_score =
+      case user_params["side"] do
+        "home" ->
+          {inc_score(user_params["home-score"]), nullify_hyphen(user_params["away-score"])}
 
-    {match, changeset}
+        "away" ->
+          {nullify_hyphen(user_params["home-score"]), inc_score(user_params["away-score"])}
+      end
+
+    match_id = String.to_integer(user_params["match"])
+
+    updated_prediction =
+      FootballResolver.change_prediction_score(%{
+        match_id: match_id,
+        user_id: socket.assigns.current_user.id,
+        side: user_params["side"],
+        score: changed_score
+      })
+
+    {:noreply, socket |> update_prediction(match_id, updated_prediction)}
+  end
+
+  def handle_event("dec-score", user_params, socket) do
+    changed_score =
+      case user_params["side"] do
+        "home" ->
+          {dec_score(user_params["home-score"]), nullify_hyphen(user_params["away-score"])}
+
+        "away" ->
+          {nullify_hyphen(user_params["home-score"]), dec_score(user_params["away-score"])}
+      end
+
+    match_id = String.to_integer(user_params["match"])
+
+    updated_prediction =
+      FootballResolver.change_prediction_score(%{
+        match_id: match_id,
+        user_id: socket.assigns.current_user.id,
+        side: user_params["side"],
+        score: changed_score
+      })
+
+    {:noreply, socket |> update_prediction(match_id, updated_prediction)}
+  end
+
+  defp add_score(%Match{} = match, socket) do
+    scores =
+      case FootballResolver.get_prediction(%{
+             match_id: match.id,
+             user_id: socket.assigns.current_user.id
+           }) do
+        %{home_score: home_score, away_score: away_score} -> {home_score, away_score}
+        _ -> {"-", "-"}
+      end
+
+    {match, scores}
+  end
+
+  defp inc_score(score) do
+    case score do
+      "-" -> 1
+      x -> String.to_integer(x) + 1
+    end
+  end
+
+  defp dec_score(score) do
+    case score do
+      "-" -> 0
+      "0" -> 0
+      x -> String.to_integer(x) - 1
+    end
+  end
+
+  defp nullify_hyphen(score) do
+    case score do
+      "-" -> 0
+      x -> String.to_integer(x)
+    end
+  end
+
+  defp update_prediction(socket, match_id, updated_prediction) do
+    predictions =
+      socket.assigns.predictions
+      |> Enum.map(fn {match, _score} = prediction ->
+        if match.id == match_id do
+          {match, {updated_prediction.home_score, updated_prediction.away_score}}
+        else
+          prediction
+        end
+      end)
+
+    socket |> assign(predictions: predictions)
   end
 end
