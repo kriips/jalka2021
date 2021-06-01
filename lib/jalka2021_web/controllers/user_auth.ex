@@ -133,9 +133,9 @@ defmodule Jalka2021Web.UserAuth do
       conn
     else
       conn
-      |> put_flash(:error, "Ennustamiseks pead sisse logima")
+      |> put_flash(:error, "Ennustamiseks pead registreerima/sisse logima")
       |> maybe_store_return_to()
-      |> redirect(to: Routes.user_session_path(conn, :new))
+      |> redirect(to: Routes.user_registration_new_path(conn, :new))
       |> halt()
     end
   end

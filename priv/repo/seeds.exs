@@ -22,9 +22,6 @@ end
 if Code.ensure_compiled?(Jalka2021.Football.Team) &&
      Jalka2021.Football.Team |> Jalka2021.Repo.aggregate(:count, :id) == 0 do
   Enum.each(Jason.decode!(File.read!('priv/repo/data/teams.json')), fn attrs ->
-    # TODO: Remove this inspect
-    IO.inspect(attrs)
-
     %Jalka2021.Football.Team{}
     |> Jalka2021.Football.Team.changeset(attrs)
     |> Jalka2021.Repo.insert!()

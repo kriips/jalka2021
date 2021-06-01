@@ -5,7 +5,7 @@ defmodule Jalka2021.Football do
 
   import Ecto.Query, warn: false
   alias Jalka2021.Repo
-  alias Jalka2021.Football.{Match, GroupPrediction}
+  alias Jalka2021.Football.{Match, GroupPrediction, PlayoffPrediction, Team}
 
   ## Database getters
 
@@ -32,6 +32,18 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_playoff_predictions_by_user(user_id) do
+    query =
+      from pp in PlayoffPrediction,
+        where: pp.user_id == ^user_id
+
+    Repo.all(query)
+  end
+
+  def get_playoff_prediction_by_user_phase_team(user_id, phase, team_id) do
+    Repo.get_by(PlayoffPrediction, user_id: user_id, team_id: team_id, phase: phase)
+  end
+
   def change_score(
         %{user_id: user_id, match_id: match_id, home_score: _home_score, away_score: _away_score} =
           attrs
@@ -45,20 +57,28 @@ defmodule Jalka2021.Football do
     end
   end
 
-  def filled_predictions(user_id) do
-    user_predictions = %{
-      "Alagrupp A" => 0,
-      "Alagrupp B" => 0,
-      "Alagrupp C" => 0,
-      "Alagrupp D" => 0,
-      "Alagrupp E" => 0,
-      "Alagrupp F" => 0
-    }
+  def get_teams() do
+    Team
+    |> Repo.all()
+  end
 
-    get_predictions_by_user(user_id)
-    |> Enum.reduce(user_predictions, fn prediction, acc ->
-      group = prediction.match.group
-      Map.put(acc, group, acc[group] + 1)
-    end)
+  def add_playoff_prediction(%{user_id: user_id, team_id: team_id, phase: phase} = attrs) do
+    case get_playoff_prediction_by_user_phase_team(user_id, phase, team_id) do
+      %PlayoffPrediction{} = prediction ->
+        prediction |> PlayoffPrediction.create_changeset(attrs) |> Repo.update!()
+
+      nil ->
+        %PlayoffPrediction{} |> PlayoffPrediction.create_changeset(attrs) |> Repo.insert!()
+    end
+  end
+
+  def remove_playoff_prediction(%{user_id: user_id, team_id: team_id, phase: phase} = attrs) do
+    case get_playoff_prediction_by_user_phase_team(user_id, phase, team_id) do
+      %PlayoffPrediction{} = prediction ->
+        prediction |> Repo.delete!()
+
+      nil ->
+        IO.inspect("weird stuff, no prediction yet")
+    end
   end
 end

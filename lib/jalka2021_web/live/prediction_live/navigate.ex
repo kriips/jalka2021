@@ -8,9 +8,21 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
   def mount(_params, session, socket) do
     socket = LiveHelpers.assign_defaults(session, socket)
     filled_predictions = FootballResolver.filled_predictions(socket.assigns.current_user.id)
-
     progress = count_progress(filled_predictions)
-    {:ok, assign(socket, filled: map_style(filled_predictions), progress: progress)}
+    progress_percentage = progress_percentage(progress)
+
+    playoffs_disabled =
+      case progress < 36 do
+        true -> "disabled"
+        _ -> ""
+      end
+
+    {:ok,
+     assign(socket,
+       filled: map_style(filled_predictions),
+       progress: progress_percentage,
+       playoffs_disabled: playoffs_disabled
+     )}
   end
 
   @impl true
@@ -30,12 +42,13 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
   end
 
   defp count_progress(filled_predictions) do
-    progress =
-      filled_predictions
-      |> Enum.reduce(0, fn {_group, count}, acc ->
-        acc + count
-      end)
+    filled_predictions
+    |> Enum.reduce(0, fn {_group, count}, acc ->
+      acc + count
+    end)
+  end
 
+  defp progress_percentage(progress) do
     progress * 100 / 63
   end
 end

@@ -6,6 +6,7 @@ defmodule Jalka2021.Repo.Migrations.CreateTeams do
       add(:name, :string, null: false)
       add(:flag, :string, null: false)
       add(:code, :string, null: false)
+      add(:group, :string, null: false)
       timestamps()
     end
 

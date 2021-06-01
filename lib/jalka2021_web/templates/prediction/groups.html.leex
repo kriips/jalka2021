@@ -6,7 +6,7 @@
             <div class="column prediction-col">
                 <div class="row height-10">
                     <div class="column">
-                        <h3 class="team-name"><%= match.home_team.name %></h3>
+                        <h4 class="team-name"><%= match.home_team.name %></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -58,7 +58,7 @@
             <div class="column prediction-col">
                 <div class="row height-10">
                     <div class="column">
-                        <h3 class="team-name team-name-right"><%= match.away_team.name %></h3>
+                        <h4 class="team-name team-name-right"><%= match.away_team.name %></h4>
                     </div>
                 </div>
                 <div class="row">
@@ -77,7 +77,7 @@
         </div>
         <% end %>
         <%= live_redirect to: Routes.user_prediction_navigate_path(@socket, :navigate) do %>
-        <button class="button-large button-outline button-main">Tagasi</button>
+        <button class="button-large <%= @predictions_done %> button-main">Tagasi</button>
         <% end %>
     </div>
 </main>

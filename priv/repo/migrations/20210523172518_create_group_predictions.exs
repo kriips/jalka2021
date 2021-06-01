@@ -11,5 +11,8 @@ defmodule Jalka2021.Repo.Migrations.CreateGroupPredictions do
 
       timestamps()
     end
+
+    create(index(:group_prediction, [:user_id, :match_id]))
+    create(index(:group_prediction, [:user_id]))
   end
 end

@@ -16,5 +16,6 @@ defmodule Jalka2021.Repo.Migrations.CreateMatches do
     end
 
     create(index(:matches, [:id]))
+    create(index(:matches, [:group]))
   end
 end

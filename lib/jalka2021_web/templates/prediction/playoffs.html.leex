@@ -1,6 +1,34 @@
 <main role="main" class="container">
-    <h1>playoffs</h1>
+    <h1>Play-offid</h1>
     <div class="container">
-
+        <h2>Kaheksandikfinalistid (16)</h2>
+        <%= for {group, teams} <- @teams16 do %>
+            <%= if group == "A" or group == "D" do %>
+            <div class="row">
+            <% end %>
+                <div class="column">
+                <%= for {team_id, team_name, checked} <- teams do %>
+                    <div>
+                        <input
+                                type="checkbox"
+                                id="team-<%= team_id %>"
+                                phx-click="toggle-team"
+                                phx-value-team=<%= team_id %>
+                                phx-value-phase=16
+                                <%= checked %>
+                        >
+                        <label class="label-inline" for="team-<%= team_id %>"><%= team_name %></label>
+                    </div>
+                <% end %>
+                </div>
+            <%= if group == "C" or group == "F" do %>
+                </div>
+        <hr />
+            <% end %>
+        <% end %>
+        <h2>Veerandfinalistid (8)</h2>
+        <h2>Poolfinalistid (4)</h2>
+        <h2>Finalistid (2)</h2>
+        <h2>Võitja (1)</h2>
     </div>
 </main>

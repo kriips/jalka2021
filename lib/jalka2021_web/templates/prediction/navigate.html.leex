@@ -40,8 +40,8 @@
         </div>
         <div class="row">
             <div class="column">
-                <%= live_redirect to: Routes.user_prediction_play_offs_path(@socket, :edit) do %>
-                <button class="button-large button-outline button-main">Playoff-mängud</button>
+                <%= live_redirect to: Routes.user_prediction_playoffs_path(@socket, :edit) do %>
+                <button class="button-large button-outline button-main" <%= @playoffs_disabled %>>Playoff-mängud</button>
                 <% end %>
             </div>
         </div>

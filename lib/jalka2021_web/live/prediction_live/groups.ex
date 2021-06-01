@@ -14,9 +14,12 @@ defmodule Jalka2021Web.UserPredictionLive.Groups do
       FootballResolver.list_matches_by_group(group)
       |> Enum.map(fn match -> add_score(match, socket) end)
 
-    # TODO: Remove this inspect
-    IO.inspect(predictions)
-    {:ok, assign(socket, group: group, predictions: predictions)}
+    {:ok,
+     assign(socket,
+       group: group,
+       predictions: predictions,
+       predictions_done: predictions_done_count(predictions)
+     )}
   end
 
   @impl true
@@ -116,6 +119,16 @@ defmodule Jalka2021Web.UserPredictionLive.Groups do
         end
       end)
 
-    socket |> assign(predictions: predictions)
+    socket
+    |> assign(predictions: predictions, predictions_done: predictions_done_count(predictions))
+  end
+
+  defp predictions_done_count(predictions) do
+    case Enum.count(predictions, fn {_pred, {home_score, away_score}} ->
+           away_score != "-" or home_score != "-"
+         end) < 6 do
+      true -> "button-outline"
+      _ -> ""
+    end
   end
 end

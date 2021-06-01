@@ -1,6 +1,7 @@
 [
   {
     "id": 759,
+    "group": "F",
     "area": {
       "id": 2088,
       "name": "Germany"
@@ -20,6 +21,7 @@
   },
   {
     "id": 760,
+    "group": "E",
     "area": {
       "id": 2224,
       "name": "Spain"
@@ -39,6 +41,7 @@
   },
   {
     "id": 765,
+    "group": "F",
     "area": {
       "id": 2187,
       "name": "Portugal"
@@ -58,6 +61,7 @@
   },
   {
     "id": 768,
+    "group": "E",
     "area": {
       "id": 2214,
       "name": "Slovakia"
@@ -77,6 +81,7 @@
   },
   {
     "id": 770,
+    "group": "D",
     "area": {
       "id": 2072,
       "name": "England"
@@ -96,6 +101,7 @@
   },
   {
     "id": 773,
+    "group": "F",
     "area": {
       "id": 2081,
       "name": "France"
@@ -115,6 +121,7 @@
   },
   {
     "id": 782,
+    "group": "B",
     "area": {
       "id": 2065,
       "name": "Denmark"
@@ -134,6 +141,7 @@
   },
   {
     "id": 784,
+    "group": "A",
     "area": {
       "id": 2114,
       "name": "Italy"
@@ -153,6 +161,7 @@
   },
   {
     "id": 788,
+    "group": "A",
     "area": {
       "id": 2234,
       "name": "Switzerland"
@@ -172,6 +181,7 @@
   },
   {
     "id": 790,
+    "group": "C",
     "area": {
       "id": 2253,
       "name": "Ukraine"
@@ -191,6 +201,7 @@
   },
   {
     "id": 792,
+    "group": "E",
     "area": {
       "id": 2233,
       "name": "Sweden"
@@ -210,6 +221,7 @@
   },
   {
     "id": 794,
+    "group": "E",
     "area": {
       "id": 2186,
       "name": "Poland"
@@ -229,6 +241,7 @@
   },
   {
     "id": 798,
+    "group": "D",
     "area": {
       "id": 2062,
       "name": "Czech Republic"
@@ -248,6 +261,7 @@
   },
   {
     "id": 799,
+    "group": "D",
     "area": {
       "id": 2058,
       "name": "Croatia"
@@ -267,6 +281,7 @@
   },
   {
     "id": 803,
+    "group": "A",
     "area": {
       "id": 2247,
       "name": "Turkey"
@@ -286,6 +301,7 @@
   },
   {
     "id": 805,
+    "group": "B",
     "area": {
       "id": 2023,
       "name": "Belgium"
@@ -305,6 +321,7 @@
   },
   {
     "id": 808,
+    "group": "B",
     "area": {
       "id": 2195,
       "name": "Russia"
@@ -324,6 +341,7 @@
   },
   {
     "id": 816,
+    "group": "C",
     "area": {
       "id": 2016,
       "name": "Austria"
@@ -343,6 +361,7 @@
   },
   {
     "id": 827,
+    "group": "F",
     "area": {
       "id": 2106,
       "name": "Hungary"
@@ -362,6 +381,7 @@
   },
   {
     "id": 833,
+    "group": "A",
     "area": {
       "id": 2264,
       "name": "Wales"
@@ -381,6 +401,7 @@
   },
   {
     "id": 1976,
+    "group": "B",
     "area": {
       "id": 2080,
       "name": "Finland"
@@ -400,6 +421,7 @@
   },
   {
     "id": 1977,
+    "group": "C",
     "area": {
       "id": 2083,
       "name": "FYR Macedonia"
@@ -419,6 +441,7 @@
   },
   {
     "id": 8601,
+    "group": "C",
     "area": {
       "id": 2163,
       "name": "Netherlands"
@@ -438,6 +461,7 @@
   },
   {
     "id": 8873,
+    "group": "D",
     "area": {
       "id": 2204,
       "name": "Scotland"
