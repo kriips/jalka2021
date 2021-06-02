@@ -44,6 +44,14 @@ defmodule Jalka2021.Football do
     Repo.get_by(PlayoffPrediction, user_id: user_id, team_id: team_id, phase: phase)
   end
 
+  def delete_playoff_predictions_by_user_team(user_id, team_id, phase) do
+    query =
+      from pp in PlayoffPrediction,
+        where: pp.user_id == ^user_id and pp.team_id == ^team_id and pp.phase <= ^phase
+
+    Repo.delete_all(query)
+  end
+
   def change_score(
         %{user_id: user_id, match_id: match_id, home_score: _home_score, away_score: _away_score} =
           attrs
@@ -72,13 +80,7 @@ defmodule Jalka2021.Football do
     end
   end
 
-  def remove_playoff_prediction(%{user_id: user_id, team_id: team_id, phase: phase} = attrs) do
-    case get_playoff_prediction_by_user_phase_team(user_id, phase, team_id) do
-      %PlayoffPrediction{} = prediction ->
-        prediction |> Repo.delete!()
-
-      nil ->
-        IO.inspect("weird stuff, no prediction yet")
-    end
+  def remove_playoff_prediction(%{user_id: user_id, team_id: team_id, phase: phase}) do
+    delete_playoff_predictions_by_user_team(user_id, team_id, phase)
   end
 end

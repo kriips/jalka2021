@@ -8,7 +8,8 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
   def mount(_params, session, socket) do
     socket = LiveHelpers.assign_defaults(session, socket)
     filled_predictions = FootballResolver.filled_predictions(socket.assigns.current_user.id)
-    progress = count_progress(filled_predictions)
+    playoff_predictions = FootballResolver.get_playoff_predictions(socket.assigns.current_user.id)
+    progress = count_progress(filled_predictions, playoff_predictions)
     progress_percentage = progress_percentage(progress)
 
     playoffs_disabled =
@@ -41,14 +42,20 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
     |> Enum.into(%{})
   end
 
-  defp count_progress(filled_predictions) do
-    filled_predictions
+  defp count_progress(filled_predictions, playoff_predictions) do
+    group_count = filled_predictions
     |> Enum.reduce(0, fn {_group, count}, acc ->
       acc + count
     end)
+    playoff_count = playoff_predictions
+    |> Enum.map(fn {_phase, teams} -> teams end)
+    |> List.flatten()
+    |> Enum.count()
+
+    group_count + playoff_count
   end
 
   defp progress_percentage(progress) do
-    progress * 100 / 63
+    progress * 100 / 67
   end
 end
