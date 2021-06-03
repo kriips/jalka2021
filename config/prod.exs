@@ -15,7 +15,6 @@ config :jalka2021, Jalka2021Web.Endpoint,
     "//unsightly-gleeful-blackrhino.gigalixirapp.com",
     "//jalka.eys.ee"
   ],
-  force_ssl: [rewrite_on: [:x_forwarded_proto], host: nil],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
