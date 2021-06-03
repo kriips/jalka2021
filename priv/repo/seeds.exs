@@ -31,9 +31,6 @@ end
 if Code.ensure_compiled?(Jalka2021.Football.Match) &&
      Jalka2021.Football.Match |> Jalka2021.Repo.aggregate(:count, :id) == 0 do
   Enum.each(Jason.decode!(File.read!('priv/repo/data/matches.json')), fn attrs ->
-    # TODO: Remove this inspect
-    IO.inspect(attrs)
-
     %Jalka2021.Football.Match{}
     |> Jalka2021.Football.Match.changeset(%{
       group: Map.get(attrs, "group"),

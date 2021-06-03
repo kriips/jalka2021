@@ -47,18 +47,11 @@ defmodule Jalka2021.Accounts.User do
   end
 
   defp validate_name(changeset) do
-    # TODO: Remove this inspect
-    IO.inspect("validating name")
-
     changeset
     |> validate_required([:name])
     |> unsafe_validate_unique(:name, Jalka2021.Repo)
     |> unique_constraint(:name)
-    # TODO: Remove this inspect
-    |> IO.inspect()
     |> check_whitelist
-    # TODO: Remove this inspect
-    |> IO.inspect()
   end
 
   defp validate_email(changeset) do
