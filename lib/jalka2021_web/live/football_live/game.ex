@@ -6,8 +6,6 @@ defmodule Jalka2021Web.FootballLive.Game do
 
   @impl true
   def mount(params, session, socket) do
-    socket = LiveHelpers.assign_defaults(session, socket)
-
     {:ok,
      socket
      |> assign(

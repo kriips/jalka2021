@@ -20,6 +20,8 @@ defmodule Jalka2021Web.Router do
   scope "/", Jalka2021Web do
     pipe_through :browser
     live "/", PageLive, :index
+    live "/football/games/:id", FootballLive.Game, :view
+    live "/football/games", FootballLive.Games, :view
   end
 
   # Other scopes may use custom stacks.
@@ -71,9 +73,6 @@ defmodule Jalka2021Web.Router do
 
   scope "/", Jalka2021Web do
     pipe_through [:browser]
-
-    live "/football/games/:id", FootballLive.Game, :view
-    live "/football/games", FootballLive.Games, :view
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
