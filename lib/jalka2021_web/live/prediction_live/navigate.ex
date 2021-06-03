@@ -43,14 +43,17 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
   end
 
   defp count_progress(filled_predictions, playoff_predictions) do
-    group_count = filled_predictions
-    |> Enum.reduce(0, fn {_group, count}, acc ->
-      acc + count
-    end)
-    playoff_count = playoff_predictions
-    |> Enum.map(fn {_phase, teams} -> teams end)
-    |> List.flatten()
-    |> Enum.count()
+    group_count =
+      filled_predictions
+      |> Enum.reduce(0, fn {_group, count}, acc ->
+        acc + count
+      end)
+
+    playoff_count =
+      playoff_predictions
+      |> Enum.map(fn {_phase, teams} -> teams end)
+      |> List.flatten()
+      |> Enum.count()
 
     group_count + playoff_count
   end

@@ -85,7 +85,7 @@ defmodule Jalka2021Web.UserPredictionLive.Playoffs do
   end
 
   defp is_disabled(count_left) do
-    if (count_left == 0) do
+    if count_left == 0 do
       "disabled"
     else
       ""
@@ -120,17 +120,19 @@ defmodule Jalka2021Web.UserPredictionLive.Playoffs do
       |> get_teams_from_predictions(predictions, 2)
       |> add_predictions_without_group(predictions, 1)
 
-      left16 = 16 - count_left_with_group(teams16)
-      left8 = 8 - count_left(teams8)
-      left4 = 4 - count_left(teams4)
-      left2 = 2 - count_left(teams2)
-      left1 = 1 - count_left(teams1)
+    left16 = 16 - count_left_with_group(teams16)
+    left8 = 8 - count_left(teams8)
+    left4 = 4 - count_left(teams4)
+    left2 = 2 - count_left(teams2)
+    left1 = 1 - count_left(teams1)
 
-      progress = 31 - left16 - left8 - left4 - left2 - left1
-      predictions_done =
-       if (progress != 31) do
-         "button-outline"
-       end
+    progress = 31 - left16 - left8 - left4 - left2 - left1
+
+    predictions_done =
+      if progress != 31 do
+        "button-outline"
+      end
+
     assign(socket,
       teams16: teams16,
       left16: left16,

@@ -5,8 +5,20 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_matches_by_group("Alagrupp #{group}")
   end
 
+  def list_matches() do
+    Football.get_matches()
+  end
+
+  def list_match(id) do
+    Football.get_match(id)
+  end
+
   def get_prediction(%{match_id: match_id, user_id: user_id}) do
     Football.get_prediction_by_user_match(user_id, match_id)
+  end
+
+  def get_predictions_by_match(match_id) do
+    Football.get_predictions_by_match(match_id)
   end
 
   def change_prediction_score(%{
@@ -18,7 +30,8 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
       user_id: user_id,
       match_id: match_id,
       home_score: home_score,
-      away_score: away_score
+      away_score: away_score,
+      result: calculate_result(home_score, away_score)
     })
   end
 
@@ -90,5 +103,13 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     |> Enum.reduce(user_playoff_predictions, fn prediction, acc ->
       Map.put(acc, prediction.phase, [prediction.team_id | acc[prediction.phase]])
     end)
+  end
+
+  defp calculate_result(home_score, away_score) do
+    cond do
+      home_score > away_score -> "home"
+      home_score < away_score -> "away"
+      home_score == away_score -> "draw"
+    end
   end
 end

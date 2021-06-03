@@ -19,8 +19,30 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_matches() do
+    query =
+      from m in Match,
+        order_by: m.date,
+        preload: [:home_team, :away_team]
+
+    Repo.all(query)
+  end
+
+  def get_match(id) do
+    Repo.get_by(Match, id: id) |> Repo.preload([:home_team, :away_team])
+  end
+
   def get_prediction_by_user_match(user_id, match_id) do
     Repo.get_by(GroupPrediction, user_id: user_id, match_id: match_id)
+  end
+
+  def get_predictions_by_match(match_id) do
+    query =
+      from gp in GroupPrediction,
+        where: gp.match_id == ^match_id,
+        preload: [:user]
+
+    Repo.all(query)
   end
 
   def get_predictions_by_user(user_id) do
@@ -53,8 +75,13 @@ defmodule Jalka2021.Football do
   end
 
   def change_score(
-        %{user_id: user_id, match_id: match_id, home_score: _home_score, away_score: _away_score} =
-          attrs
+        %{
+          result: result,
+          user_id: user_id,
+          match_id: match_id,
+          home_score: _home_score,
+          away_score: _away_score
+        } = attrs
       ) do
     case get_prediction_by_user_match(user_id, match_id) do
       %GroupPrediction{} = prediction ->

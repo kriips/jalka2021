@@ -27,7 +27,7 @@ defmodule Jalka2021.Football.GroupPrediction do
   @doc false
   def create_changeset(group_prediction, attrs) do
     group_prediction
-    |> cast(attrs, [:user_id, :match_id, :home_score, :away_score])
+    |> cast(attrs, [:user_id, :match_id, :home_score, :away_score, :result])
     |> cast_assoc(:user)
     |> assoc_constraint(:user)
     |> cast_assoc(:match)
