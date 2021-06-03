@@ -14,7 +14,7 @@ defmodule Jalka2021Web.UserSessionController do
     if user = Accounts.get_user_by_name_and_password(name, password) do
       UserAuth.log_in_user(conn, user, user_params)
     else
-      render(conn, "new.html", error_message: "Invalid email or password")
+      render(conn, "new.html", error_message: "Vale nimi või parool")
     end
   end
 
