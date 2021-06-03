@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :jalka2021, Jalka2021Web.Endpoint,
-  url: [host: "unsightly-gleeful-blackrhino.gigalixirapp.com", port: 80],
+  url: [host: "jalka.eys.ee", port: 443],
   check_origin: [
     "//unsightly-gleeful-blackrhino.gigalixirapp.com",
     "//jalka.eys.ee"
