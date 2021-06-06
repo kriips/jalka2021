@@ -22,6 +22,7 @@ defmodule Jalka2021Web.Router do
     live "/", PageLive, :index
     live "/football/games/:id", FootballLive.Game, :view
     live "/football/games", FootballLive.Games, :view
+    live "/football/playoffs", FootballLive.Playoffs, :view
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,20 @@
+<main role="main" class="container">
+    <h1>Playoffid</h1>
+    <%= for {phase, teams_predictions} <- @predictions do %>
+        <h3>
+            <%= case phase do
+              1 -> "Võitja"
+              2 -> "Finalistid"
+              4 -> "Poolfinalistid"
+              8 -> "Veerandfinalistid"
+              16 -> "Kaheksandikfinalistid"
+            end%>
+        </h3>
+        <%= for {team_name, users} <- teams_predictions do %>
+                <b><%= team_name %> - </b>
+                <%= Enum.join(users, ", ")  %>
+                <br/>
+        <% end %>
+        <hr/>
+    <% end %>
+</main>

@@ -54,6 +54,14 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_playoff_predictions() do
+    query =
+      from pp in PlayoffPrediction,
+        preload: [:user, :team]
+
+    Repo.all(query)
+  end
+
   def get_playoff_predictions_by_user(user_id) do
     query =
       from pp in PlayoffPrediction,

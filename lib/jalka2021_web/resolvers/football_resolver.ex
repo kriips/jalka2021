@@ -106,6 +106,15 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     end)
   end
 
+  def get_playoff_predictions() do
+    Football.get_playoff_predictions()
+    |> group_by_phase()
+    |> group_by_team()
+    |> sort_by_count()
+    |> sort_by_phase()
+    |> IO.inspect()
+  end
+
   defp calculate_result(home_score, away_score) do
     cond do
       home_score > away_score -> "home"
@@ -116,7 +125,53 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
 
   defp group_by_result(predictions) do
     grouped = %{home: [], draw: [], away: []}
+
     predictions
-    |> Enum.group_by(&(&1.result), &(&1))
+    |> Enum.group_by(& &1.result, & &1)
+  end
+
+  defp group_by_phase(predictions) do
+    playoff_predictions = %{
+      1 => [],
+      2 => [],
+      4 => [],
+      8 => [],
+      16 => []
+    }
+
+    predictions
+    |> Enum.reduce(playoff_predictions, fn prediction, acc ->
+      Map.put(acc, prediction.phase, [
+        %{team_name: prediction.team.name, user_name: prediction.user.name}
+        | acc[prediction.phase]
+      ])
+    end)
+  end
+
+  defp group_by_team(predictions) do
+    predictions
+    |> Enum.map(fn {phase, user_prediction} ->
+      {phase, Enum.group_by(user_prediction, & &1.team_name, & &1.user_name) |> Map.to_list()}
+    end)
+  end
+
+  defp sort_by_count(predictions) do
+    predictions
+    |> Enum.map(fn {phase, user_predictions} ->
+      {
+        phase,
+        user_predictions
+        |> Enum.sort(fn {team_name1, users1}, {team_name2, users2} ->
+          Enum.count(users1) >= Enum.count(users2)
+        end)
+      }
+    end)
+  end
+
+  defp sort_by_phase(predictions) do
+    predictions
+    |> Enum.sort(fn {phase1, _pred1}, {phase2, _pred2} ->
+      phase1 >= phase2
+    end)
   end
 end

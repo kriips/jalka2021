@@ -58,9 +58,14 @@
     <div class="row">
       <div class="column">
         <%= live_redirect to: Routes.football_games_path(@socket, :view) do %>
-          <button class="button-large button-outline button-main">Alagrupimängud</button></div>
-      <% end %>
-      <div class="column column-offset-5"><button disabled class="button-large button-outline button-main">Playoff-mängud</button></div>
+          <button class="button-large button-outline button-main">Alagrupimängud</button>
+        <% end %>
+      </div>
+      <div class="column column-offset-5">
+        <%= live_redirect to: Routes.football_playoffs_path(@socket, :view) do %>
+          <button class="button-large button-outline button-main">Playoff-mängud</button>
+        <% end %>
+      </div>
     </div>
   </div>
 </section>
