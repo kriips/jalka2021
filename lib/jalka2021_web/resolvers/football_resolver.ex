@@ -17,8 +17,9 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_prediction_by_user_match(user_id, match_id)
   end
 
-  def get_predictions_by_match(match_id) do
+  def get_predictions_by_match_result(match_id) do
     Football.get_predictions_by_match(match_id)
+    |> group_by_result()
   end
 
   def change_prediction_score(%{
@@ -111,5 +112,11 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
       home_score < away_score -> "away"
       home_score == away_score -> "draw"
     end
+  end
+
+  defp group_by_result(predictions) do
+    grouped = %{home: [], draw: [], away: []}
+    predictions
+    |> Enum.group_by(&(&1.result), &(&1))
   end
 end

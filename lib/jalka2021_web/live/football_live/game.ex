@@ -9,7 +9,7 @@ defmodule Jalka2021Web.FootballLive.Game do
     {:ok,
      socket
      |> assign(
-       predictions: FootballResolver.get_predictions_by_match(params["id"]),
+       predictions: FootballResolver.get_predictions_by_match_result(params["id"]),
        match: FootballResolver.list_match(params["id"])
      )}
   end

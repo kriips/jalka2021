@@ -1,8 +1,34 @@
 <main role="main" class="container">
-    <h1><%=@match.home_team.name <> " - " <>  @match.away_team.name %> <%= @match.home_score %>:<%= @match.away_score %></h1>
-    <dl>
-        <%= for prediction <- @predictions do %>
-        <dt><%= prediction.user.name %> <%= prediction.home_score %>:<%= prediction.away_score %></dt>
+    <h1>
+        <%=@match.home_team.name <> " - " <>  @match.away_team.name %>
+        <%= if @match.finished do %>
+            <%= @match.home_score %>:<%= @match.away_score %>
         <% end %>
-    </dl>
+    </h1>
+    <div class="row">
+        <div class="column">
+            <h4><%= @match.home_team.name %> võit</h4>
+            <%= if @predictions["home"] do %>
+                <%= for prediction <- @predictions["home"] do %>
+                    <dt><%= prediction.user.name %> <%= prediction.home_score %>:<%= prediction.away_score %></dt>
+                <% end %>
+            <% end %>
+        </div>
+        <div class="column">
+            <h4>Viik</h4>
+            <%= if @predictions["draw"] do %>
+                <%= for prediction <- @predictions["draw"] do %>
+                    <dt><%= prediction.user.name %> <%= prediction.home_score %>:<%= prediction.away_score %></dt>
+                <% end %>
+            <% end %>
+        </div>
+        <div class="column">
+            <h4><%= @match.away_team.name %> võit</h4>
+            <%= if @predictions["away"] do %>
+                <%= for prediction <- @predictions["away"] do %>
+                    <dt><%= prediction.user.name %> <%= prediction.home_score %>:<%= prediction.away_score %></dt>
+                <% end %>
+            <% end %>
+        </div>
+    </div>
 </main>
