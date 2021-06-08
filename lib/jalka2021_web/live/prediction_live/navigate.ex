@@ -18,11 +18,18 @@ defmodule Jalka2021Web.UserPredictionLive.Navigate do
         _ -> ""
       end
 
+    playoffs_filled =
+      case progress == 67 do
+        true -> ""
+        _ -> "button-outline"
+      end
+
     {:ok,
      assign(socket,
        filled: map_style(filled_predictions),
        progress: progress_percentage,
-       playoffs_disabled: playoffs_disabled
+       playoffs_disabled: playoffs_disabled,
+       playoffs_filled: playoffs_filled
      )}
   end
 
