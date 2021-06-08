@@ -124,8 +124,6 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
   end
 
   defp group_by_result(predictions) do
-    grouped = %{home: [], draw: [], away: []}
-
     predictions
     |> Enum.group_by(& &1.result, & &1)
   end
@@ -161,7 +159,7 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
       {
         phase,
         user_predictions
-        |> Enum.sort(fn {team_name1, users1}, {team_name2, users2} ->
+        |> Enum.sort(fn {_team_name1, users1}, {_team_name2, users2} ->
           Enum.count(users1) >= Enum.count(users2)
         end)
       }
