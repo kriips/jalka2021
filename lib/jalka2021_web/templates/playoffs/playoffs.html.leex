@@ -11,7 +11,7 @@
             end%>
         </h3>
         <%= for {team_name, users} <- teams_predictions do %>
-                <b><%= team_name %> - </b>
+                <b><%= team_name %>(<%= Enum.count(users)%>) - </b>
                 <%= Enum.join(users, ", ")  %>
                 <br/>
         <% end %>
