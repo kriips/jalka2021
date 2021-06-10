@@ -13,6 +13,14 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_match(id)
   end
 
+  def update_match(%{"away_score" => away_score, "home_score" => home_score, "game_id" => game_id}) do
+    Football.update_match_score(
+      String.to_integer(game_id),
+      String.to_integer(home_score),
+      String.to_integer(away_score)
+    )
+  end
+
   def get_prediction(%{match_id: match_id, user_id: user_id}) do
     Football.get_prediction_by_user_match(user_id, match_id)
   end
@@ -112,10 +120,9 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     |> group_by_team()
     |> sort_by_count()
     |> sort_by_phase()
-    |> IO.inspect()
   end
 
-  defp calculate_result(home_score, away_score) do
+  def calculate_result(home_score, away_score) do
     cond do
       home_score > away_score -> "home"
       home_score < away_score -> "away"

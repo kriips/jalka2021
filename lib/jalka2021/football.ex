@@ -6,6 +6,7 @@ defmodule Jalka2021.Football do
   import Ecto.Query, warn: false
   alias Jalka2021.Repo
   alias Jalka2021.Football.{Match, GroupPrediction, PlayoffPrediction, Team}
+  alias Jalka2021Web.Resolvers.FootballResolver
 
   ## Database getters
 
@@ -96,6 +97,24 @@ defmodule Jalka2021.Football do
 
       nil ->
         %GroupPrediction{} |> GroupPrediction.create_changeset(attrs) |> Repo.insert!()
+    end
+  end
+
+  def update_match_score(game_id, home_score, away_score) do
+    case get_match(game_id) do
+      %Match{} = match ->
+        match
+        |> Match.create_changeset(%{
+          home_score: home_score,
+          away_score: away_score,
+          finished: true,
+          result: FootballResolver.calculate_result(home_score, away_score)
+        })
+        |> Repo.update!()
+
+      nil ->
+        IO.inspect("Incorrect game id")
+        IO.inspect(game_id)
     end
   end
 
