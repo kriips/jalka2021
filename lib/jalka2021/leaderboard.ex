@@ -66,6 +66,10 @@ defmodule Jalka2021.Leaderboard do
     end
   end
 
+  defp sanitize(nil) do
+    nil
+  end
+
   defp sanitize(group_prediction) do
     if group_prediction.home_score && group_prediction.away_score &&
          is_nil(group_prediction.result) do
