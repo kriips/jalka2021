@@ -20,6 +20,15 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_finished_matches() do
+    query =
+      from m in Match,
+        where: m.finished == true,
+        order_by: m.date
+
+    Repo.all(query)
+  end
+
   def get_matches() do
     query =
       from m in Match,

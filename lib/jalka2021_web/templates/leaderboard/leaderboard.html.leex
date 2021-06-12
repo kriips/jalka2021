@@ -1,0 +1,23 @@
+<main role="main" class="container">
+    <h1>Edetabel</h1>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Koht</th>
+                    <th>Nimi</th>
+                    <th>Punktid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= for {rank, name, points} <- @leaderboard do %>
+                    <tr>
+                        <td><%= rank %></td>
+                        <td><%= name %></td>
+                        <td><%= points %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</main>

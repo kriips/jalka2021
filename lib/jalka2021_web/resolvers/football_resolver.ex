@@ -9,6 +9,10 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_matches()
   end
 
+  def list_finished_matches() do
+    Football.get_finished_matches()
+  end
+
   def list_match(id) do
     Football.get_match(id)
   end
@@ -19,6 +23,8 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
       String.to_integer(home_score),
       String.to_integer(away_score)
     )
+
+    Jalka2021.Leaderboard.recalc_leaderboard()
   end
 
   def get_prediction(%{match_id: match_id, user_id: user_id}) do
