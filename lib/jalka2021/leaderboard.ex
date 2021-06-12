@@ -38,8 +38,9 @@ defmodule Jalka2021.Leaderboard do
   defp calculate_points(%User{} = user, finished_matches) do
     points =
       finished_matches
-      |> Enum.reduce(0, fn (finished_match, points) ->
+      |> Enum.reduce(0, fn finished_match, points ->
         group_prediction = Football.get_prediction_by_user_match(user.id, finished_match.id)
+
         if finished_match.result == group_prediction.result do
           if finished_match.home_score == group_prediction.home_score &&
                finished_match.away_score == group_prediction.away_score do
@@ -51,6 +52,7 @@ defmodule Jalka2021.Leaderboard do
           points
         end
       end)
+
     {user.name, points}
   end
 
@@ -59,11 +61,13 @@ defmodule Jalka2021.Leaderboard do
   end
 
   defp add_rank([{name, points} | users], rank, index, prev_points, acc) do
-    new_rank = if points == prev_points do
-      rank
-    else
-      index
-    end
+    new_rank =
+      if points == prev_points do
+        rank
+      else
+        index
+      end
+
     add_rank(users, new_rank, index + 1, points, acc ++ [{new_rank, name, points}])
   end
 
