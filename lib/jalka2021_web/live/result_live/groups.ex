@@ -3,10 +3,9 @@ defmodule Jalka2021Web.ResultLive.Groups do
 
   alias Jalka2021Web.Resolvers.FootballResolver
   alias Jalka2021Web.LiveHelpers
-  alias Jalka2021.Football.{Match}
 
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     socket = LiveHelpers.assign_defaults(session, socket)
     {:ok, socket}
   end

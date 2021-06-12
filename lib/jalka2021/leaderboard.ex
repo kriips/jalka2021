@@ -5,7 +5,7 @@ defmodule Jalka2021.Leaderboard do
   alias Jalka2021.Football
   alias Jalka2021.Accounts.User
 
-  def start_link(leaderboard \\ %{}) do
+  def start_link(_leaderboard \\ %{}) do
     GenServer.start_link(__MODULE__, recalculate_leaderboard(), name: __MODULE__)
   end
 
@@ -31,7 +31,7 @@ defmodule Jalka2021.Leaderboard do
 
     AccountsResolver.list_users()
     |> Enum.map(&calculate_points(&1, finished_matches))
-    |> Enum.sort(fn {_name1, points1}, {_name2, points2} -> points1 >= points2 end)
+    |> Enum.sort(fn {_id1, _name1, points1}, {_id2, _name2, points2} -> points1 >= points2 end)
     |> add_rank()
   end
 
@@ -46,10 +46,10 @@ defmodule Jalka2021.Leaderboard do
         add_points(points, finished_match, group_prediction)
       end)
 
-    {user.name, points}
+    {user.id, user.name, points}
   end
 
-  defp add_points(points, finished_match, nil) do
+  defp add_points(points, _finished_match, nil) do
     points
   end
 
@@ -86,11 +86,11 @@ defmodule Jalka2021.Leaderboard do
     end
   end
 
-  defp add_rank([{name, points} | users], rank \\ 1, index \\ 1, acc \\ []) do
-    add_rank(users, rank, index + 1, points, acc ++ [{rank, name, points}])
+  defp add_rank([{id, name, points} | users], rank \\ 1, index \\ 1, acc \\ []) do
+    add_rank(users, rank, index + 1, points, acc ++ [{id, rank, name, points}])
   end
 
-  defp add_rank([{name, points} | users], rank, index, prev_points, acc) do
+  defp add_rank([{id, name, points} | users], rank, index, prev_points, acc) do
     new_rank =
       if points == prev_points do
         rank
@@ -98,10 +98,10 @@ defmodule Jalka2021.Leaderboard do
         index
       end
 
-    add_rank(users, new_rank, index + 1, points, acc ++ [{new_rank, name, points}])
+    add_rank(users, new_rank, index + 1, points, acc ++ [{id, new_rank, name, points}])
   end
 
-  defp add_rank([], rank, index, prev_points, acc) do
+  defp add_rank([], _rank, _index, _prev_points, acc) do
     acc
   end
 end

@@ -10,10 +10,14 @@
                 </tr>
             </thead>
             <tbody>
-                <%= for {rank, name, points} <- @leaderboard do %>
+                <%= for {id, rank, name, points} <- @leaderboard do %>
                     <tr>
                         <td><%= rank %></td>
-                        <td><%= name %></td>
+                        <td>
+                            <%= live_redirect to: Routes.football_user_path(@socket, :view, id) do %>
+                                <%= name %>
+                            <% end %>
+                        </td>
                         <td><%= points %></td>
                     </tr>
                 <% end %>

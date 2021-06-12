@@ -36,6 +36,10 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     |> group_by_result()
   end
 
+  def get_predictions_by_user(user_id) do
+    Football.get_predictions_by_user(user_id)
+  end
+
   def change_prediction_score(%{
         match_id: match_id,
         user_id: user_id,
@@ -120,6 +124,21 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     end)
   end
 
+  def get_playoff_predictions_with_team_names(user_id) do
+    user_playoff_predictions = %{
+      16 => [],
+      8 => [],
+      4 => [],
+      2 => [],
+      1 => []
+    }
+
+    Football.get_playoff_predictions_by_user(user_id)
+    |> Enum.reduce(user_playoff_predictions, fn prediction, acc ->
+      Map.put(acc, prediction.phase, [prediction.team.name | acc[prediction.phase]])
+    end)
+  end
+
   def get_playoff_predictions() do
     Football.get_playoff_predictions()
     |> group_by_phase()
@@ -134,6 +153,28 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
       home_score < away_score -> "away"
       home_score == away_score -> "draw"
     end
+  end
+
+  def add_correctness(user_predictions) do
+    user_predictions
+    |> Enum.map(fn user_prediction ->
+      correct_result =
+        if user_prediction.match.finished do
+          user_prediction.result == user_prediction.match.result
+        else
+          false
+        end
+
+      correct_score =
+        if correct_result do
+          user_prediction.match.home_score == user_prediction.home_score &&
+            user_prediction.match.away_score == user_prediction.away_score
+        else
+          false
+        end
+
+      {user_prediction, correct_result, correct_score}
+    end)
   end
 
   defp group_by_result(predictions) do

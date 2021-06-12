@@ -59,7 +59,7 @@ defmodule Jalka2021.Football do
     query =
       from gp in GroupPrediction,
         where: gp.user_id == ^user_id,
-        preload: [:match]
+        preload: [match: [:home_team, :away_team]]
 
     Repo.all(query)
   end
@@ -75,7 +75,8 @@ defmodule Jalka2021.Football do
   def get_playoff_predictions_by_user(user_id) do
     query =
       from pp in PlayoffPrediction,
-        where: pp.user_id == ^user_id
+        where: pp.user_id == ^user_id,
+        preload: [:team]
 
     Repo.all(query)
   end
