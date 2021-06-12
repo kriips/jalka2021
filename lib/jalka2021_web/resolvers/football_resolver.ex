@@ -38,6 +38,9 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
 
   def get_predictions_by_user(user_id) do
     Football.get_predictions_by_user(user_id)
+    |> Enum.sort(fn prediction1, prediction2 ->
+      NaiveDateTime.compare(prediction1.match.date, prediction2.match.date) != :gt
+    end)
   end
 
   def change_prediction_score(%{
