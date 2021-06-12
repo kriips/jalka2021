@@ -9,19 +9,6 @@ defmodule Jalka2021.Leaderboard do
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
       team_id: 770,
-      phase: 2,
-      include: true
-    })
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 805,
-      phase: 2,
-      include: true
-    })
-
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 770,
       phase: 4,
       include: true
     })
@@ -44,52 +31,77 @@ defmodule Jalka2021.Leaderboard do
       include: true
     })
 
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 770,
-      phase: 4,
-      include: true
-    })
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 805,
-      phase: 4,
-      include: true
-    })
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 765,
-      phase: 4,
-      include: true
-    })
-    FootballResolver.change_playoff_prediction(%{
-      user_id: 45,
-      team_id: 773,
-      phase: 4,
-      include: true
-    })
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
       team_id: 784,
       phase: 4,
-      include: true
+      include: false
     })
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
       team_id: 799,
       phase: 4,
-      include: true
+      include: false
     })
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
       team_id: 760,
       phase: 4,
-      include: true
+      include: false
     })
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
       team_id: 833,
       phase: 4,
+      include: false
+    })
+
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 770,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 805,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 765,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 773,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 784,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 799,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 760,
+      phase: 8,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 833,
+      phase: 8,
       include: true
     })
     GenServer.start_link(__MODULE__, recalculate_leaderboard(), name: __MODULE__)
