@@ -39,21 +39,47 @@ defmodule Jalka2021.Leaderboard do
     points =
       finished_matches
       |> Enum.reduce(0, fn finished_match, points ->
-        group_prediction = Football.get_prediction_by_user_match(user.id, finished_match.id)
+        group_prediction =
+          Football.get_prediction_by_user_match(user.id, finished_match.id)
+          |> sanitize()
 
-        if finished_match.result == group_prediction.result do
-          if finished_match.home_score == group_prediction.home_score &&
-               finished_match.away_score == group_prediction.away_score do
-            points + 2
-          else
-            points + 1
-          end
-        else
-          points
-        end
+        add_points(points, finished_match, group_prediction)
       end)
 
     {user.name, points}
+  end
+
+  defp add_points(points, finished_match, nil) do
+    points
+  end
+
+  defp add_points(points, finished_match, group_prediction) do
+    if finished_match.result == group_prediction.result do
+      if finished_match.home_score == group_prediction.home_score &&
+           finished_match.away_score == group_prediction.away_score do
+        points + 2
+      else
+        points + 1
+      end
+    else
+      points
+    end
+  end
+
+  defp sanitize(group_prediction) do
+    if group_prediction.home_score && group_prediction.away_score &&
+         is_nil(group_prediction.result) do
+      IO.inspect("updating result")
+      IO.inspect(group_prediction)
+
+      FootballResolver.change_prediction_score(%{
+        match_id: group_prediction.match_id,
+        user_id: group_prediction.user_id,
+        score: {group_prediction.home_score, group_prediction.away_score}
+      })
+    else
+      group_prediction
+    end
   end
 
   defp add_rank([{name, points} | users], rank \\ 1, index \\ 1, acc \\ []) do
