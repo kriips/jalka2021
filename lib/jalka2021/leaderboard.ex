@@ -8,8 +8,88 @@ defmodule Jalka2021.Leaderboard do
   def start_link(_leaderboard \\ %{}) do
     FootballResolver.change_playoff_prediction(%{
       user_id: 45,
+      team_id: 770,
+      phase: 2,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
       team_id: 805,
-      phase: 1,
+      phase: 2,
+      include: true
+    })
+
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 770,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 805,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 765,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 773,
+      phase: 4,
+      include: true
+    })
+
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 770,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 805,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 765,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 773,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 784,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 799,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 760,
+      phase: 4,
+      include: true
+    })
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 833,
+      phase: 4,
       include: true
     })
     GenServer.start_link(__MODULE__, recalculate_leaderboard(), name: __MODULE__)
