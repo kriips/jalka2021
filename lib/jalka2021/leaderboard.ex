@@ -6,6 +6,12 @@ defmodule Jalka2021.Leaderboard do
   alias Jalka2021.Accounts.User
 
   def start_link(_leaderboard \\ %{}) do
+    FootballResolver.change_playoff_prediction(%{
+      user_id: 45,
+      team_id: 805,
+      phase: 1,
+      include: true
+    })
     GenServer.start_link(__MODULE__, recalculate_leaderboard(), name: __MODULE__)
   end
 
