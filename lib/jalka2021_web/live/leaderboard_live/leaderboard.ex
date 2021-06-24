@@ -6,7 +6,6 @@ defmodule Jalka2021Web.LeaderboardLive.Leaderboard do
 
   @impl true
   def mount(_params, session, socket) do
-    socket = LiveHelpers.assign_defaults(session, socket)
     {:ok, assign(socket, leaderboard: Leaderboard.get_leaderboard())}
   end
 

@@ -5,7 +5,7 @@ defmodule Jalka2021.Football do
 
   import Ecto.Query, warn: false
   alias Jalka2021.Repo
-  alias Jalka2021.Football.{Match, GroupPrediction, PlayoffPrediction, Team}
+  alias Jalka2021.Football.{Match, GroupPrediction, PlayoffPrediction, Team, PlayoffResult}
   alias Jalka2021Web.Resolvers.FootballResolver
 
   ## Database getters
@@ -55,6 +55,14 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_team_by_name(team_name) do
+    query =
+      from t in Team,
+        where: t.name == ^team_name
+
+    Repo.all(query)
+  end
+
   def get_predictions_by_user(user_id) do
     query =
       from gp in GroupPrediction,
@@ -83,6 +91,10 @@ defmodule Jalka2021.Football do
 
   def get_playoff_prediction_by_user_phase_team(user_id, phase, team_id) do
     Repo.get_by(PlayoffPrediction, user_id: user_id, team_id: team_id, phase: phase)
+  end
+
+  def get_playoff_result_by_phase_team(phase, team_id) do
+    Repo.get_by(PlayoffResult, team_id: team_id, phase: phase)
   end
 
   def delete_playoff_predictions_by_user_team(user_id, team_id, phase) do
@@ -125,6 +137,16 @@ defmodule Jalka2021.Football do
       nil ->
         IO.inspect("Incorrect game id")
         IO.inspect(game_id)
+    end
+  end
+
+  def update_playoff_result(phase, team_id) do
+    case get_playoff_result_by_phase_team(phase, team_id) do
+      %PlayoffResult{} = result ->
+        result |> Repo.delete!()
+
+      nil ->
+        %PlayoffResult{} |> PlayoffResult.create_changeset(%{"phase": phase, "team_id": team_id}) |> Repo.insert!()
     end
   end
 

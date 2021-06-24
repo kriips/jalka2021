@@ -70,6 +70,7 @@ defmodule Jalka2021Web.Router do
     #    live "/football/predict/playoffs", UserPredictionLive.Playoffs, :edit
     #    live "/football/predict/:group", UserPredictionLive.Groups, :edit
     live "/football/result/group", ResultLive.Groups, :create
+    live "/football/result/playoff", ResultLive.Playoff, :create
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email

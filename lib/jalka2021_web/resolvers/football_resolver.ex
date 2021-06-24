@@ -27,6 +27,16 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Jalka2021.Leaderboard.recalc_leaderboard()
   end
 
+  def update_playoff_result(%{"team_name" => team_name, "phase" => phase}) do
+
+    Football.update_playoff_result(
+      String.to_integer(phase),
+      Football.get_team_by_name(team_name) |> hd() |> Map.get(:id)
+    )
+
+    Jalka2021.Leaderboard.recalc_leaderboard()
+  end
+
   def get_prediction(%{match_id: match_id, user_id: user_id}) do
     Football.get_prediction_by_user_match(user_id, match_id)
   end
