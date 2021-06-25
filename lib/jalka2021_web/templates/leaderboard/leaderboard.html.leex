@@ -6,11 +6,13 @@
                 <tr>
                     <th>Koht</th>
                     <th>Nimi</th>
-                    <th>Punktid</th>
+                    <th>Grupi punktid</th>
+                    <th>Playoffi punktid</th>
+                    <th>Kokku</th>
                 </tr>
             </thead>
             <tbody>
-                <%= for {id, rank, name, points} <- @leaderboard do %>
+                <%= for {id, rank, name, gpoints, ppoints, points} <- @leaderboard do %>
                     <tr>
                         <td><%= rank %></td>
                         <td>
@@ -18,7 +20,9 @@
                                 <%= name %>
                             <% end %>
                         </td>
-                        <td><%= points %></td>
+                        <td><%= gpoints %></td>
+                        <td><%= ppoints %></td>
+                        <td><b><%= points %></b></td>
                     </tr>
                 <% end %>
             </tbody>

@@ -2,10 +2,9 @@ defmodule Jalka2021Web.LeaderboardLive.Leaderboard do
   use Phoenix.LiveView
 
   alias Jalka2021.Leaderboard
-  alias Jalka2021Web.LiveHelpers
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, assign(socket, leaderboard: Leaderboard.get_leaderboard())}
   end
 

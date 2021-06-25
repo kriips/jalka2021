@@ -28,11 +28,30 @@ defmodule Jalka2021.Leaderboard do
 
   defp recalculate_leaderboard() do
     finished_matches = FootballResolver.list_finished_matches()
+    playoff_results = FootballResolver.list_playoff_results()
 
     AccountsResolver.list_users()
     |> Enum.map(&calculate_points(&1, finished_matches))
-    |> Enum.sort(fn {_id1, _name1, points1}, {_id2, _name2, points2} -> points1 >= points2 end)
+    |> Enum.map(&calculate_playoff_points(&1, playoff_results))
+    |> Enum.sort(fn {_id1, _name1, _gpoints1, _ppoints1, points1}, {_id2, _name2, _gpoints2, _ppoints2, points2} -> points1 >= points2 end)
     |> add_rank()
+  end
+
+  defp calculate_playoff_points({user_id, user_name, group_points}, playoff_results) do
+    playoff_predictions = FootballResolver.get_playoff_predictions(user_id)
+
+    playoff_points =
+      playoff_results
+      |> Enum.reduce(0, fn playoff_result, points ->
+        if Map.get(playoff_predictions, playoff_result.phase)
+           |> Enum.member?(playoff_result.team_id) do
+          add_playoff_points(points, playoff_result.phase)
+        else
+          points
+        end
+      end)
+
+    {user_id, user_name, group_points, playoff_points, group_points + playoff_points}
   end
 
   defp calculate_points(%User{} = user, finished_matches) do
@@ -47,6 +66,16 @@ defmodule Jalka2021.Leaderboard do
       end)
 
     {user.id, user.name, points}
+  end
+
+  defp add_playoff_points(points, phase) do
+    case phase do
+      16 -> points + 1
+      8 -> points + 3
+      4 -> points + 5
+      2 -> points + 6
+      1 -> points + 8
+    end
   end
 
   defp add_points(points, _finished_match, nil) do
@@ -73,9 +102,6 @@ defmodule Jalka2021.Leaderboard do
   defp sanitize(group_prediction) do
     if group_prediction.home_score && group_prediction.away_score &&
          is_nil(group_prediction.result) do
-      IO.inspect("updating result")
-      IO.inspect(group_prediction)
-
       FootballResolver.change_prediction_score(%{
         match_id: group_prediction.match_id,
         user_id: group_prediction.user_id,
@@ -86,11 +112,11 @@ defmodule Jalka2021.Leaderboard do
     end
   end
 
-  defp add_rank([{id, name, points} | users], rank \\ 1, index \\ 1, acc \\ []) do
-    add_rank(users, rank, index + 1, points, acc ++ [{id, rank, name, points}])
+  defp add_rank([{id, name, gpoints, ppoints, points} | users], rank \\ 1, index \\ 1, acc \\ []) do
+    add_rank(users, rank, index + 1, points, acc ++ [{id, rank, name, gpoints, ppoints, points}])
   end
 
-  defp add_rank([{id, name, points} | users], rank, index, prev_points, acc) do
+  defp add_rank([{id, name, gpoints, ppoints, points} | users], rank, index, prev_points, acc) do
     new_rank =
       if points == prev_points do
         rank
@@ -98,7 +124,7 @@ defmodule Jalka2021.Leaderboard do
         index
       end
 
-    add_rank(users, new_rank, index + 1, points, acc ++ [{id, new_rank, name, points}])
+    add_rank(users, new_rank, index + 1, points, acc ++ [{id, new_rank, name, gpoints, ppoints, points}])
   end
 
   defp add_rank([], _rank, _index, _prev_points, acc) do

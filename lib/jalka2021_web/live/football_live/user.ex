@@ -12,7 +12,9 @@ defmodule Jalka2021Web.FootballLive.User do
          FootballResolver.get_predictions_by_user(params["id"])
          |> FootballResolver.add_correctness(),
        user: AccountsResolver.get_user(params["id"]),
-       playoff_predictions: FootballResolver.get_playoff_predictions_with_team_names(params["id"])
+       playoff_predictions:
+         FootballResolver.get_playoff_predictions_with_team_names(params["id"])
+         |> FootballResolver.add_playoff_correctness()
      )}
   end
 

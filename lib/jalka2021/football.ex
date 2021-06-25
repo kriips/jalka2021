@@ -29,6 +29,12 @@ defmodule Jalka2021.Football do
     Repo.all(query)
   end
 
+  def get_playoff_results() do
+    query = from(pr in PlayoffResult)
+
+    Repo.all(query)
+  end
+
   def get_matches() do
     query =
       from m in Match,
@@ -146,7 +152,9 @@ defmodule Jalka2021.Football do
         result |> Repo.delete!()
 
       nil ->
-        %PlayoffResult{} |> PlayoffResult.create_changeset(%{"phase": phase, "team_id": team_id}) |> Repo.insert!()
+        %PlayoffResult{}
+        |> PlayoffResult.create_changeset(%{phase: phase, team_id: team_id})
+        |> Repo.insert!()
     end
   end
 

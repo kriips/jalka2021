@@ -13,6 +13,10 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_finished_matches()
   end
 
+  def list_playoff_results() do
+    Football.get_playoff_results()
+  end
+
   def list_match(id) do
     Football.get_match(id)
   end
@@ -28,7 +32,6 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
   end
 
   def update_playoff_result(%{"team_name" => team_name, "phase" => phase}) do
-
     Football.update_playoff_result(
       String.to_integer(phase),
       Football.get_team_by_name(team_name) |> hd() |> Map.get(:id)
@@ -156,6 +159,7 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     Football.get_playoff_predictions()
     |> group_by_phase()
     |> group_by_team()
+    |> add_playoff_result()
     |> sort_by_count()
     |> sort_by_phase()
   end
@@ -190,6 +194,23 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     end)
   end
 
+  def add_playoff_correctness(user_playoff_predictions) do
+    user_playoff_predictions
+    |> Enum.reduce(%{}, fn {phase, team_names}, acc ->
+      modified_team_names =
+        team_names
+        |> Enum.map(fn team_name ->
+          if team_reached_phase(team_name, phase) do
+            "<b style=\"color:green\">" <> team_name <> "</b>"
+          else
+            team_name
+          end
+        end)
+
+      Map.put(acc, phase, modified_team_names)
+    end)
+  end
+
   defp group_by_result(predictions) do
     predictions
     |> Enum.group_by(& &1.result, & &1)
@@ -220,13 +241,35 @@ defmodule Jalka2021Web.Resolvers.FootballResolver do
     end)
   end
 
+  defp add_playoff_result(predictions) do
+    predictions
+    |> Enum.map(fn {phase, user_predictions} ->
+      {phase, add_playoff_result_to_predictions(phase, user_predictions)}
+    end)
+  end
+
+  defp add_playoff_result_to_predictions(phase, user_predictions) do
+    modified_predictions =
+      Enum.map(user_predictions, fn {team_name, users} ->
+        {team_name, team_reached_phase(team_name, phase), users}
+      end)
+
+    modified_predictions
+  end
+
+  defp team_reached_phase(team_name, phase) do
+    team_id = Football.get_team_by_name(team_name) |> hd() |> Map.get(:id)
+    Football.get_playoff_result_by_phase_team(phase, team_id) != nil
+  end
+
   defp sort_by_count(predictions) do
     predictions
     |> Enum.map(fn {phase, user_predictions} ->
       {
         phase,
         user_predictions
-        |> Enum.sort(fn {_team_name1, users1}, {_team_name2, users2} ->
+        |> Enum.sort(fn {_team_name1, _reached_phase1, users1},
+                        {_team_name2, _reached_phase2, users2} ->
           Enum.count(users1) >= Enum.count(users2)
         end)
       }

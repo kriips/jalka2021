@@ -10,8 +10,8 @@
               16 -> "Kaheksandikfinalistid"
             end%>
         </h3>
-        <%= for {team_name, users} <- teams_predictions do %>
-                <b><%= team_name %>(<%= Enum.count(users)%>) - </b>
+        <%= for {team_name, reached_phase, users} <- teams_predictions do %>
+                <b <%= if reached_phase do "style=" <> "color:green" end%>><%= team_name %>(<%= Enum.count(users)%>) - </b>
                 <%= Enum.join(users, ", ")  %>
                 <br/>
         <% end %>
